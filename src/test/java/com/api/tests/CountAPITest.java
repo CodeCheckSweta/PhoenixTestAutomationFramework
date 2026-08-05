@@ -1,9 +1,9 @@
 package com.api.tests;
 
-import static com.api.constant.Role.FD;
-import static com.api.utils.AuthTokenProvider.getToken;
-import static com.api.utils.ConfigManager.getProperty;
-import static io.restassured.RestAssured.given;
+import static com.api.constant.Role.*;
+import static com.api.utils.AuthTokenProvider.*;
+import static com.api.utils.ConfigManager.*;
+import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
 import org.testng.annotations.Test;

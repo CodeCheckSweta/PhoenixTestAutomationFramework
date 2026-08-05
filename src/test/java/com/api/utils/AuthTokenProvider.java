@@ -1,7 +1,7 @@
 package com.api.utils;
 
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.equalTo;
+import static io.restassured.RestAssured.*;
+import static org.hamcrest.Matchers.*;
 
 import static com.api.constant.Role.*;
 

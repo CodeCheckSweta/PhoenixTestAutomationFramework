@@ -1,16 +1,14 @@
 package com.api.tests;
 
-import static com.api.utils.AuthTokenProvider.getToken;
-import static com.api.utils.ConfigManager.getProperty;
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.lessThan;
+import static com.api.utils.AuthTokenProvider.*;
+import static com.api.utils.ConfigManager.*;
+import static com.api.constant.Role.*;
+import static io.restassured.RestAssured.*;
+import static org.hamcrest.Matchers.*;
 
 import java.io.IOException;
 
 import org.testng.annotations.Test;
-
-import static com.api.constant.Role.*;
 
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
