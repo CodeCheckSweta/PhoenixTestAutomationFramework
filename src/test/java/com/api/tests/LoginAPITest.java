@@ -22,6 +22,6 @@ public class LoginAPITest {
 		given().baseUri(getProperty("BASE_URI")).and().contentType(JSON).and().accept(ANY).and().body(userCredentials)
 				.log().uri().log().method().log().headers().log().body().when().post("/login").then().log().all()
 				.statusCode(200).time(lessThan(2000L)).and().body("message", equalTo("Success")).and()
-				.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema/loginResponseSchema.json"));
+				.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema/LoginResponseSchema.json"));
 	}
 }

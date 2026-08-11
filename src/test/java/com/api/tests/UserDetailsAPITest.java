@@ -22,7 +22,7 @@ public class UserDetailsAPITest {
 		given().baseUri(getProperty("BASE_URI")).and().header(authHeader).and().accept(ContentType.JSON).log().uri()
 				.log().method().log().body().log().headers().when().get("userdetails").then().log().all()
 				.statusCode(200).time(lessThan(2000L)).and().body("message", equalTo("Success")).and()
-				.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema/userDetailsResponseSchema.json"));
+				.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema/UserDetailsResponseSchema.json"));
 
 	}
 }
