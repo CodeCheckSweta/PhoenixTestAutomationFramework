@@ -14,7 +14,7 @@ import io.restassured.http.ContentType;
 import io.restassured.http.Header;
 import io.restassured.module.jsv.JsonSchemaValidator;
 
-public class UserDetailsAPITests {
+public class UserDetailsAPITest {
 	@Test(description = "Verify user details API with valid credentials")
 	public void userDetailsAPITest() throws IOException {
 		Header authHeader = new Header("Authorization", getToken(FD));

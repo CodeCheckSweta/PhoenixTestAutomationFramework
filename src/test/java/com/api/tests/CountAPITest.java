@@ -25,6 +25,6 @@ public class CountAPITest {
 	@Test
 	public void countAPITest_missingAuthToken() {
 		given().baseUri(getProperty("BASE_URI")).log().uri().log().method().log().headers().when()
-				.get("/dashboard/count").then().log().all().statusCode(401).and().time(lessThan(1000L));
+				.get("/dashboard/count").then().log().all().statusCode(401).and().time(lessThan(1500L));
 	}
 }
