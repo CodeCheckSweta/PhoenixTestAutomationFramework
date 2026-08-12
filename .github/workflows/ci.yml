@@ -12,8 +12,7 @@ on:
       env: #name of the variable
         description: "Environment"
         type: choice
-        options:
-          - qa, uat, dev
+        options: [qa, uat, dev]
         default: qa
         required: true
 
