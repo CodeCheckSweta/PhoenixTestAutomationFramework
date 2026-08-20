@@ -1,13 +1,18 @@
 package com.api.tests;
 
-import static com.api.constant.Role.FD;
+import static com.api.constant.Role.*;
+import static com.api.utils.DateTimeUtil.*;
+import static com.api.utils.SpecUtil.*;
 import static io.restassured.RestAssured.given;
-import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
-import static org.hamcrest.Matchers.*;
+import static io.restassured.module.jsv.JsonSchemaValidator.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.startsWith;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.api.constant.Model;
@@ -22,13 +27,13 @@ import com.api.request.model.Customer;
 import com.api.request.model.CustomerAddress;
 import com.api.request.model.CustomerProduct;
 import com.api.request.model.Problems;
-import static com.api.utils.DateTimeUtil.*;
-import static com.api.utils.SpecUtil.*;
 
 public class CreateJobAPITest {
-
-	@Test
-	public void createJobAPITest() {
+	
+CreateJobPayload createJobPayload;
+	
+	@BeforeMethod(description = "Creating the create jobAPI request payload")
+	public void setup() {
 
 		Customer customer = new Customer("Camron", "Rohan", "900-855-0363", "", "angelsweta03@gmail.com", "");
 		CustomerAddress customerAddress = new CustomerAddress("c 304", "Jupiter", "MG road", "Bangur Nagar",
@@ -40,9 +45,14 @@ public class CreateJobAPITest {
 		List<Problems> problemList = new ArrayList<Problems>();
 		problemList.add(problems);
 
-		CreateJobPayload createJobPayload = new CreateJobPayload(ServiceLocation.SERVICE_LOCATION_A.getCode(),
+		createJobPayload = new CreateJobPayload(ServiceLocation.SERVICE_LOCATION_A.getCode(),
 				Platform.FRONT_DESK.getCode(), Warranty_Status.IN_WARRANTY.getCode(), OEM.GOOGLE.getCode(), customer,
 				customerAddress, customerProduct, problemList);
+	}
+
+	@Test(description = "Verify if the create job API is able to create Inwarranty job", groups= {"api", "smoke", "regression"})
+	public void createJobAPITest() {
+
 
 		given().spec(requestSpecWithAuth(FD, createJobPayload)).when().post("/job/create").then()
 				.spec(responseSpec_OK())

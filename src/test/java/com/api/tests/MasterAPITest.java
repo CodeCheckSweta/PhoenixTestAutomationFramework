@@ -1,26 +1,29 @@
 package com.api.tests;
 
-import static com.api.constant.Role.*;
-import static io.restassured.RestAssured.*;
+import static com.api.constant.Role.FD;
+import static io.restassured.RestAssured.given;
+import static io.restassured.module.jsv.JsonSchemaValidator.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.everyItem;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.hasKey;
+import static org.hamcrest.Matchers.notNullValue;
 
-import static org.hamcrest.Matchers.*;
 import org.testng.annotations.Test;
 
-import com.api.utils.SpecUtil;
-
-import static io.restassured.module.jsv.JsonSchemaValidator.*;
+import static com.api.utils.SpecUtil.*;
 
 public class MasterAPITest {
-	@Test
+	@Test(description = "Verify if the master API is giving correct response", groups= {"api", "smoke", "regression"})
 	public void masterAPITest() {
-		given().spec(SpecUtil.requestSpecWithAuth(FD)).when().post("master").then().spec(SpecUtil.responseSpec_OK()).body("message", equalTo("Success")).body("data", notNullValue())
+		given().spec(requestSpecWithAuth(FD)).when().post("master").then().spec(responseSpec_OK()).body("message", equalTo("Success")).body("data", notNullValue())
 				.body("data", hasKey("mst_oem")).body("$", hasKey("data")).body("data.mst_oem.size()", greaterThan(0))
 				.body("data.mst_model.size()", equalTo(3)).body("data.mst_model.id", everyItem(notNullValue()))
 				.body(matchesJsonSchemaInClasspath("response-schema/MasterAPIResponseSchema-FD.json"));
 	}
 
-	@Test
+	@Test(description = "Verify if the master API is giving correct status code for invalid token", groups= {"api", "negative", "smoke", "regression"})
 	public void invalidTokenMasterAPITest() {
-		given().spec(SpecUtil.requestSpec()).when().post("master").then().spec(SpecUtil.responseSpec_TEXT(401));
+		given().spec(requestSpec()).when().post("master").then().spec(responseSpec_TEXT(401));
 	}
 }

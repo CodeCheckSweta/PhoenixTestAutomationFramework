@@ -8,16 +8,16 @@ import java.io.IOException;
 
 import org.testng.annotations.Test;
 
-import com.api.utils.SpecUtil;
+import static com.api.utils.SpecUtil.*;
 
-import io.restassured.module.jsv.JsonSchemaValidator;
+import static io.restassured.module.jsv.JsonSchemaValidator.*;
 
 public class UserDetailsAPITest {
-	@Test(description = "Verify user details API with valid credentials")
+	@Test(description = "Verify if the user details API response is shown correctly", groups= {"api", "smoke", "regression"})
 	public void userDetailsAPITest() throws IOException {
 
-		given().spec(SpecUtil.requestSpecWithAuth(FD)).when().get("userdetails").then().spec(SpecUtil.responseSpec_OK()).and().body("message", equalTo("Success")).and()
-				.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema/UserDetailsResponseSchema.json"));
+		given().spec(requestSpecWithAuth(FD)).when().get("userdetails").then().spec(responseSpec_OK()).and().body("message", equalTo("Success")).and()
+				.body(matchesJsonSchemaInClasspath("response-schema/UserDetailsResponseSchema.json"));
 
 	}
 }
