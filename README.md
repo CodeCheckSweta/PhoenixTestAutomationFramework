@@ -145,7 +145,7 @@ This keeps the test readable while combining **HTTP response validation, busines
 - ✅ Data/model separation
 - ✅ Maven-based execution
 - ✅ CI/CD-ready test structure
-
+<!--
 ## 🚀 Future Enhancements
 
 Potential improvements for expanding the framework include:
@@ -158,7 +158,7 @@ Potential improvements for expanding the framework include:
 - [ ] Request/response logging for failed tests
 - [ ] Retry handling for transient failures
 - [ ] Dockerised execution
-
+-->
 ## 👩‍💻 Author
 
 **Sweta Singh** — Senior QA Engineer / SDET
