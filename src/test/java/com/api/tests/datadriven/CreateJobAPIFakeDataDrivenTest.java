@@ -13,12 +13,12 @@ import org.testng.annotations.Test;
 
 import com.api.request.model.CreateJobPayload;
 
-public class CreateJobAPIDataDrivenTest {
+public class CreateJobAPIFakeDataDrivenTest {
 	
 	@Test(description = "Verify if the create job API is able to create Inwarranty job", 
-			groups= {"api", "regression","datadriven", "csv"},
+			groups= {"api", "regression","datadriven","faker"},
 			dataProviderClass = com.dataproviders.DataProviderUtils.class,
-			dataProvider = "CreateJobAPIDataProvider")
+			dataProvider = "CreateJobAPIFakerDataProvider")
 	public void createJobAPITest(CreateJobPayload createJobPayload) {
 
 		given().spec(requestSpecWithAuth(FD, createJobPayload)).when().post("/job/create").then()
