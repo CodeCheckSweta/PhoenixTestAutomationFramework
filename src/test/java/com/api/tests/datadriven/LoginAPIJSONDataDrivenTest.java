@@ -15,7 +15,7 @@ public class LoginAPIJSONDataDrivenTest {
 	
 	
 	@Test(description = "Verify if login API is working for user iamfd", 
-			groups={"api", "regression", "smoke"},
+			groups={"api", "regression", "smoke","json"},
 			dataProviderClass = com.dataproviders.DataProviderUtils.class,
 			dataProvider = "LoginAPIJSONDataProvider")
 	public void loginAPITest(UserCredentials userCredentials) {

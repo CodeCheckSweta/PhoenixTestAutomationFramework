@@ -25,7 +25,7 @@ public class DataProviderUtils {
 	
 	@DataProvider(name="LoginAPIJSONDataProvider", parallel = true)
 	public static Iterator<UserCredentials> loginAPIJSONDataProvider() {
-		return JsonReaderUtil.loadJSON("testData/demo.json", UserCredentials[].class);	
+		return JsonReaderUtil.loadJSON("testData/LoginAPITestData.json", UserCredentials[].class);	
 	}
 	
 	@DataProvider(name="CreateJobAPIDataProvider", parallel = true)
@@ -48,5 +48,10 @@ public class DataProviderUtils {
 		String fakerCount = System.getProperty("fakerCount","5");
 		int fakerCountInt = Integer.parseInt(fakerCount);
 		return FakerDataGenerator.generatefakeCreateJobData(fakerCountInt);
+	}
+	
+	@DataProvider(name="CreateJobAPIJSONDataProvider", parallel = true)
+	public static Iterator<CreateJobPayload> createJobAPIJSONDataProvider() {
+		return JsonReaderUtil.loadJSON("testData/CreateJobAPIData.json", CreateJobPayload[].class);	
 	}
 }
