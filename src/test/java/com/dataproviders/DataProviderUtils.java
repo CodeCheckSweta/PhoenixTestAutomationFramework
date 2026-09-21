@@ -10,6 +10,7 @@ import com.api.request.model.CreateJobPayload;
 import com.api.request.model.UserCredentials;
 import com.api.utils.CSVReaderUtil;
 import com.api.utils.CreateJobBeanMapper;
+import com.api.utils.ExcelReaderUtil;
 import com.api.utils.FakerDataGenerator;
 import com.api.utils.JsonReaderUtil;
 import com.dataproviders.api.bean.CreateJobBean;
@@ -23,11 +24,6 @@ public class DataProviderUtils {
 		return CSVReaderUtil.loadCSV("testData/LoginCreds.csv", UserBean.class);	
 	}
 	
-	@DataProvider(name="LoginAPIJSONDataProvider", parallel = true)
-	public static Iterator<UserCredentials> loginAPIJSONDataProvider() {
-		return JsonReaderUtil.loadJSON("testData/LoginAPITestData.json", UserCredentials[].class);	
-	}
-	
 	@DataProvider(name="CreateJobAPIDataProvider", parallel = true)
 	public static Iterator<CreateJobPayload> createJobAPIDataProvider() {
 		Iterator<CreateJobBean> createJobBeanIterator = CSVReaderUtil.loadCSV("testData/CreateJobData.csv", CreateJobBean.class);
@@ -39,7 +35,6 @@ public class DataProviderUtils {
 			payload = CreateJobBeanMapper.mapper(createJobBean);
 			payloadList.add(payload);
 		}
-		
 		return payloadList.iterator();
 	}
 	
@@ -50,8 +45,18 @@ public class DataProviderUtils {
 		return FakerDataGenerator.generatefakeCreateJobData(fakerCountInt);
 	}
 	
+	@DataProvider(name="LoginAPIJSONDataProvider", parallel = true)
+	public static Iterator<UserCredentials> loginAPIJSONDataProvider() {
+		return JsonReaderUtil.loadJSON("testData/LoginAPITestData.json", UserCredentials[].class);	
+	}
+	
 	@DataProvider(name="CreateJobAPIJSONDataProvider", parallel = true)
 	public static Iterator<CreateJobPayload> createJobAPIJSONDataProvider() {
 		return JsonReaderUtil.loadJSON("testData/CreateJobAPIData.json", CreateJobPayload[].class);	
+	}
+	
+	@DataProvider(name="LoginAPIExcelDataProvider", parallel = true)
+	public static Iterator<UserCredentials> loginAPIExcelDataProvider() {
+		return ExcelReaderUtil.loadTestData("testData/PhoenixTestData.xlsx");	
 	}
 }
