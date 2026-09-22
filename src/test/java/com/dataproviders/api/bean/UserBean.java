@@ -1,7 +1,11 @@
 package com.dataproviders.api.bean;
 
+import com.poiji.annotation.ExcelCellName;
+
 public class UserBean {
+	@ExcelCellName("username")
 	private String username;
+	@ExcelCellName("password")
 	private String password;
 
 	public UserBean() {
