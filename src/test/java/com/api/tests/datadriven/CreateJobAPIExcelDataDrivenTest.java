@@ -16,9 +16,9 @@ public class CreateJobAPIExcelDataDrivenTest {
 			groups= {"api", "regression","datadriven", "json"},
 			dataProviderClass = com.dataproviders.DataProviderUtils.class,
 			dataProvider = "CreateJobAPIExcelDataProvider")
-	public void createJobAPITest(CreateJobPayload createJobPayload) {
+	public void createJobAPITest(CreateJobPayload createJobpayload) {
 
-		given().spec(requestSpecWithAuth(FD, createJobPayload)).when().post("/job/create").then()
+		given().spec(requestSpecWithAuth(FD, createJobpayload)).when().post("/job/create").then()
 				.spec(responseSpec_OK())
 				.body(matchesJsonSchemaInClasspath("response-schema/CreateJobAPIResponseSchema.json"))
 				.body("message", equalTo("Job created successfully. ")).body("data.id", notNullValue())

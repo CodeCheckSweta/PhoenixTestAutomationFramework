@@ -1,15 +1,14 @@
 package com.api.tests.datadriven;
 
+import static com.api.utils.SpecUtil.requestSpec;
+import static com.api.utils.SpecUtil.responseSpec_OK;
 import static io.restassured.RestAssured.given;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.Matchers.equalTo;
 
 import org.testng.annotations.Test;
 
-import com.api.request.model.UserCredentials;
-
-import static com.api.utils.SpecUtil.*;
-
-import static io.restassured.module.jsv.JsonSchemaValidator.*;
+import com.dataproviders.api.bean.UserBean;
 
 public class LoginAPIExcelDataDrivenTest {
 	
@@ -18,9 +17,9 @@ public class LoginAPIExcelDataDrivenTest {
 			groups={"api", "regression", "smoke","json"},
 			dataProviderClass = com.dataproviders.DataProviderUtils.class,
 			dataProvider = "LoginAPIExcelDataProvider")
-	public void loginAPITest(UserCredentials userCredentials) {
+	public void loginAPITest(UserBean userBean) {
 		given()
-			.spec(requestSpec(userCredentials))
+			.spec(requestSpec(userBean))
 			.when()
 			.post("/login")
 			.then()
